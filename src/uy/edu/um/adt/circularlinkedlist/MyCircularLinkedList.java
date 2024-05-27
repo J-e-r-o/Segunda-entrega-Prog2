@@ -11,6 +11,6 @@ public interface MyCircularLinkedList<T> {
 
     int size();
 
-s
+
 
 }
