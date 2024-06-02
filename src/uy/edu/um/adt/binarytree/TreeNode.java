@@ -1,7 +1,7 @@
 
 package src.uy.edu.um.adt.binarytree;
 
-import uy.edu.um.adt.linkedlist.MyList;
+import src.uy.edu.um.adt.linkedlist.MyList;
 
 public class TreeNode<K extends Comparable<K>, V> {
 
