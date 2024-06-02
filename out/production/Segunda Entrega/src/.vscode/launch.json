@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "s",
+            "request": "launch",
+            "mainClass": "TestUnitarios.s",
+            "projectName": "TADs_67144bad"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ProvasDoJavinha",
+            "request": "launch",
+            "mainClass": "uy.edu.um.adt.hashCerrado.ProvasDoJavinha",
+            "projectName": "TADs_67144bad"
+        },
+        {
+            "type": "java",
+            "name": "PruebasDeHash",
+            "request": "launch",
+            "mainClass": "uy.edu.um.adt.hashCerrado.PruebasDeHash",
+            "projectName": "TADs_67144bad"
+        }
+    ]
+}
