@@ -43,7 +43,7 @@ public class Main{
                         System.out.println("Opcion invalida, intente de nuevo");
                 }
             }
-
+            scanner.close();
 
 
 
