@@ -23,9 +23,9 @@ public class Reporte1 {
 
         Scanner scanner1 = new Scanner(System.in);
 
-        System.out.println("Eliga un pais: ");
+        System.out.println("Elija un pais: ");
         String pais = scanner1.nextLine();
-        System.out.println("Eliga una dia (Formato YYYY-MM-DD): ");
+        System.out.println("Elija una dia (Formato YYYY-MM-DD): ");
         String dia_desordenado = scanner1.nextLine();
 
         //Aca se modifica el string de YYYY-MM-DD a MM/DD/YYYY
@@ -44,7 +44,7 @@ public class Reporte1 {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             boolean isHeader = true;
             while ((line = br.readLine()) != null) {
-                String[] columns = line.split(csvSplitBy, -1); // Using -1 to include trailing empty strings
+                String[] columns = line.split(csvSplitBy, -1);
 
                 if (isHeader) {
                     isHeader = false;
