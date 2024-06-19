@@ -5,32 +5,32 @@ public class NodoCancion {
     String spotify_id;
     String name;
     String artists;
-    int daily_rank;
-    int daily_movement;
-    int weekly_movement;
+    String daily_rank;
+    String daily_movement;
+    String weekly_movement;
     String country;
     String snapshot_date;
-    int popularity;
+    String popularity;
     String is_explicit;
-    int duration_ms;
+    String duration_ms;
     String album_name;
     String album_release_date;
-    float danceability;
-    float energy;
-    int key;
-    float loudness;
-    int mode;
-    float speechiness;
-    float acousticness;
+    String danceability;
+    String energy;
+    String key;
+    String loudness;
+    String mode;
+    String speechiness;
+    String acousticness;
     String instrumentalness;         //Creo que deberia ser "Long" por dudo que importe
-    float liveness;
-    float valance;
-    float tempo;
-    int time_signature;
+    String liveness;
+    String valance;
+    String tempo;
+    String time_signature;
 
-    public NodoCancion(String spotify_id,String name,String artists,int daily_rank, int daily_movement, int weekly_movement,String country,String snapshot_date,int popularity, String is_explicit, int duration_ms,
-                       String album_name,String album_release_date, float danceability, float energy, int key, float loudness, int mode  ,float speechiness, float acousticness,String instrumentalness,float liveness,  float valance,
-                       float tempo, int time_signature) {
+    public NodoCancion(String spotify_id,String name,String artists,String daily_rank, String daily_movement, String weekly_movement,String country,String snapshot_date,String popularity, String is_explicit, String duration_ms,
+                       String album_name,String album_release_date, String danceability, String energy, String key, String loudness, String mode  ,String speechiness, String acousticness,String instrumentalness,String liveness,  String valance,
+                       String tempo, String time_signature) {
         this.spotify_id=spotify_id;
         this.name= name;
         this.artists=artists;
@@ -57,5 +57,41 @@ public class NodoCancion {
         this.tempo=tempo;
         this.time_signature=time_signature;
     }
+
+
+    @Override
+    public String toString() {
+        return "NodoCancion{" +
+                "spotify_id='" + spotify_id + '\'' +
+                ", name='" + name + '\'' +
+                ", artists='" + artists + '\'' +
+                ", daily_rank=" + daily_rank +
+                ", daily_movement=" + daily_movement +
+                ", weekly_movement=" + weekly_movement +
+                ", country='" + country + '\'' +
+                ", snapshot_date='" + snapshot_date + '\'' +
+                ", popularity=" + popularity +
+                ", is_explicit='" + is_explicit + '\'' +
+                ", duration_ms=" + duration_ms +
+                ", album_name='" + album_name + '\'' +
+                ", album_release_date='" + album_release_date + '\'' +
+                ", danceability=" + danceability +
+                ", energy=" + energy +
+                ", key=" + key +
+                ", loudness=" + loudness +
+                ", mode=" + mode +
+                ", speechiness=" + speechiness +
+                ", acousticness=" + acousticness +
+                ", instrumentalness='" + instrumentalness + '\'' +
+                ", liveness=" + liveness +
+                ", valance=" + valance +
+                ", tempo=" + tempo +
+                ", time_signature=" + time_signature +
+                '}';
+    }
+
+
+
+
 }
 

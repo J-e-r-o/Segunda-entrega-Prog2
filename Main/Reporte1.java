@@ -44,7 +44,7 @@ public class Reporte1 {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             boolean isHeader = true;
             while ((line = br.readLine()) != null) {
-                String[] columns = line.split(csvSplitBy, -1);
+                String[] columns = line.split(csvSplitBy);
 
                 if (isHeader) {
                     isHeader = false;
