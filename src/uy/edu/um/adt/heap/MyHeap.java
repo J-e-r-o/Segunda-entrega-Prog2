@@ -1,21 +1,11 @@
-package src.uy.edu.um.adt.heap;
+package src.uy.edu.um.adt.Heap;
 
 public interface MyHeap<T extends Comparable<T>> {
+    void insert(T value) throws HeapOverflow;
+    T delete() throws EmptyHeapException;
+    int size();
+    boolean isEmpty();
+    String toString();
+    T top();
 
-    /**
-     * Elimina el minimo o máximo dependiendo si es un Heap minimo o maximo (Ver constructor parametro isHeapMin)
-     * @return
-     */
-	T delete();
-
-    /**
-     * Obtiene el minimo o maximo dependiendo si es un heap minimo o maximo
-     * @return
-     */
-	T get();
-	
-	void insert(T element);
-	
-	int size();
-	
 }

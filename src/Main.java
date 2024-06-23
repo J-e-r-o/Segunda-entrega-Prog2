@@ -8,12 +8,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static src.Utils.UploadEntities.addEntry;
 import static src.Utils.UploadEntities.addSong;
 import static src.Utils.Operations.*;
 
@@ -29,16 +31,16 @@ Pasar a Hash para carga eficiente
 
 public class Main{
     public static void  main(String [] args){
-        //MyList<Song> songs = new MyLinkedListImpl<Song>();
         hashInterfaze<String, Song> songs = new hash<>(800000);
-
-        MyList<Entry> entries = new MyLinkedListImpl<Entry>();
+        hashInterfaze<Song, Entry> entries = new hash<>(1000000);
 
         String csvFile ="universal_top_spotify_songs.csv" ;
         String line = "";
         String delimiter = ",";
 
+
         int[] songData = {0, 1, 12, 23};
+        int[] entryData = {3, 6, 7};
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -47,14 +49,24 @@ public class Main{
             while ((line = br.readLine()) != null) {
                 String[] columns = line.split(delimiter);
                 boolean canLoadData = true;
+                boolean canLoadEntry = true;
                 for (int i = 0; i < songData.length; i++) {
                     if (columns[songData[i]].isEmpty()) {
                         canLoadData = false;
                     }
                 }
+                for (int i = 0; i < entryData.length; i++) {
+                    if (columns[entryData[i]].isEmpty()) {
+                        canLoadEntry = false;
+                    }
+                }
 
                 if (canLoadData) {
                     addSong(songs, columns);
+                }
+
+                if (canLoadEntry) {
+                    addEntry(entries, songs, columns);
                 }
             }
         } catch (IOException e) {
@@ -63,6 +75,8 @@ public class Main{
             throw new RuntimeException(e);
         }
         System.out.println(songs.size());
+        System.out.println(entries.size());
+
 
 
 
@@ -82,12 +96,12 @@ public class Main{
 
                 switch (opcion) {
                     case 1:
-                        /*System.out.println("Ingrese un dia (YYYY-MM-DD): ");
-                        Date newInputDate = scanner.next();
+                        System.out.println("Ingrese una fecha: ");
+                        SimpleDateFormat dateFormat5 = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dateCase1 = dateFormat5.parse(scanner.next());
                         System.out.println("Ingrese un país: ");
                         String newInputCountry = scanner.next();
-
-                        top10SongsFromCountryAndDate(entries, newInputCountry, newInputDate);*/
+                        top10SongsFromCountryAndDate(entries, newInputCountry, dateCase1);
                         break;
                     case 2:
                         break;
@@ -102,7 +116,7 @@ public class Main{
                             SimpleDateFormat dateFormat = new SimpleDateFormat(scanner.next());
                             Date parsedDate = dateFormat.parse(scanner.next());
                             Artist artist = new Artist(newInputArtist);
-                            artistInTop50GivenDate(entries, parsedDate, artist);
+                            //artistInTop50GivenDate(entries, parsedDate, artist);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }

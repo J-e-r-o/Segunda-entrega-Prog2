@@ -22,8 +22,7 @@ public class UploadEntities {
             return;
         }
         MyList<Artist> newArtists = new MyLinkedListImpl<Artist>();
-        newArtists = addArtists(line);
-
+        //newArtists = addArtists(line);
 
         String key = line[0].replaceAll("\"", "").trim();
         Song newSong = new Song(key, line[1], Float.parseFloat(formattedTempo), formattedString, newArtists);
@@ -33,8 +32,30 @@ public class UploadEntities {
 
     }
 
-    public static void addEntry(MyList<Entry> entries, String[] line) {
-        return;
+    public static void addEntry(hashInterfaze<Song, Entry> entries, hashInterfaze<String, Song> songs, String[] line) throws Exception {
+
+        String stringPosition = line[3];
+        if (!canBeConvertedToInt(stringPosition)) {
+            return;
+        }
+        int formattedPosition = Integer.parseInt(stringPosition.replaceAll("\"", "").trim());
+        String formattedCountry = line[6].replaceAll("\"", "").trim();
+        String formattedDate = line[7].replaceAll("\"", "").trim();
+        if (!isValidDate(formattedDate)) { //if the data is wrong stops the execution
+            return;
+        }
+
+        String key = line[0].replaceAll("\"", "").trim();
+        if (!songs.contains(key)) {
+            addSong(songs, line);
+        }
+        Song song = songs.get(key);
+
+        Entry newEntry = new Entry(song, formattedCountry, formattedDate, formattedPosition);
+
+        if (!entries.contains(song)) {
+            entries.put(song, newEntry);
+        }
     }
 
     public static MyList<Artist> addArtists(String[] line) {
@@ -65,6 +86,18 @@ public class UploadEntities {
             dateFormat.parse(dateStr);
             return true;
         } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean canBeConvertedToInt(String str) {
+        if (str == null || str.trim().isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str.trim());
+            return true;
+        } catch (NumberFormatException e) {
             return false;
         }
     }
