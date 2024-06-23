@@ -7,5 +7,7 @@ public interface hashInterfaze<K, V> {
     public boolean contains(K key);
     
     public void remove(K clave);
+
+    public V get(K key);
 }
 

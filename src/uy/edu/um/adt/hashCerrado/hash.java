@@ -15,9 +15,9 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     
  
 
-    public hash(){
+    public hash(int value){
         capacity=0;
-        tableSize=11;
+        tableSize=value;
         Hash= new Vector<>(tableSize);
         for (int i = 0; i < tableSize; i++) {
             Hash.add(null);}
@@ -138,6 +138,19 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     }
         resultado= resultado +"\b" +"\b" +"}";
         return resultado;
+    }
+
+    public V get(K key) {
+        int index = HashFunction(key);
+
+        while (Hash.get(index) != null) {
+            if (Hash.get(index).key.equals(key) && !Hash.get(index).borrado) {
+                return Hash.get(index).valor;
+            }
+            index = (index + 1) % tableSize;
+        }
+
+        return null;
     }
 
 

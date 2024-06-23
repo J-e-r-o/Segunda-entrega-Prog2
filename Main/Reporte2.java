@@ -13,7 +13,8 @@ import java.util.Scanner;
 public class Reporte2 {
 
     public static void reporet2(){
-        Scanner escaner = new Scanner(System.in);
+
+        /*Scanner escaner = new Scanner(System.in);
         System.out.println("Elija la fecha (formato YYYY-MM-DD): ");
         String fecha= escaner.nextLine();
         MySearchBinaryTree<String,NodoCancion2> resultado = new MySearchBinaryTreeImpl<>();
@@ -71,7 +72,8 @@ public class Reporte2 {
             e.printStackTrace();
         }
 
-
+    */
     }
+
 
 }
