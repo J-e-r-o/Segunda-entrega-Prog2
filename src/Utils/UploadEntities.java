@@ -21,9 +21,10 @@ public class UploadEntities {
         if (!isValidDate(formattedString)) { //if the data is wrong stops the execution
             return;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(formattedString); //album release date
         MyList<Artist> newArtists = new MyLinkedListImpl<Artist>();
-        //Date parsedDate = dateFormat.parse(formattedString);
+        newArtists = addArtists(line);
+
+
         String key = line[0].replaceAll("\"", "").trim();
         Song newSong = new Song(key, line[1], Float.parseFloat(formattedTempo), formattedString, newArtists);
         if (!songs.contains(key)) {
@@ -34,6 +35,22 @@ public class UploadEntities {
 
     public static void addEntry(MyList<Entry> entries, String[] line) {
         return;
+    }
+
+    public static MyList<Artist> addArtists(String[] line) {
+
+        String artists = line[2];
+        artists = artists.replaceAll("^\"|\"$", "");
+        String[] artistList = artists.split(",\\s*");
+        MyList<Artist> artistsToAdd = new MyLinkedListImpl<>();
+
+        for (int i = 0; i < artistList.length; i++) {
+            String artistName = artistList[i];
+            Artist newArtist = new Artist(artistName);
+            artistsToAdd.add(newArtist);
+        }
+
+        return artistsToAdd;
     }
 
     public static boolean isValidDate(String dateStr) {

@@ -62,6 +62,8 @@ public class Main{
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println(songs.size());
+
 
 
         Scanner scanner = new Scanner(System.in);
