@@ -1,5 +1,7 @@
 package src.uy.edu.um.adt.linkedlist;
 
+import java.util.Iterator;
+
 public interface MyList<T> {
 
     void add(T value);
@@ -11,5 +13,7 @@ public interface MyList<T> {
     void remove(T value);
 
     int size();
+
+    public Iterator<T> iterator();
 
 }

@@ -1,4 +1,7 @@
 package src.uy.edu.um.adt.hashCerrado;
+import src.uy.edu.um.adt.linkedlist.MyLinkedListImpl;
+import src.uy.edu.um.adt.linkedlist.MyList;
+
 import java.util.Vector;
 import java.util.ArrayList;
 
@@ -15,9 +18,9 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     
  
 
-    public hash(){
+    public hash(int value){
         capacity=0;
-        tableSize=11;
+        tableSize=value;
         Hash= new Vector<>(tableSize);
         for (int i = 0; i < tableSize; i++) {
             Hash.add(null);}
@@ -123,9 +126,17 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     }
     //Listo
     private int HashFunction(K key){
-        return (key.hashCode()) % tableSize;
+        int hashValue = key.hashCode();
+        if (hashValue < 0) {
+            hashValue = -hashValue;
+            if (hashValue < 0) {
+                hashValue = 0;
+            }
+        }
+        return hashValue % tableSize;
     }
     //Listo
+
     public String ShowHash(){
         String resultado="{";
         for(int i=0;i<tableSize;i++){
@@ -138,6 +149,34 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     }
         resultado= resultado +"\b" +"\b" +"}";
         return resultado;
+    }
+
+    public V get(K key) {
+        int index = HashFunction(key);
+
+        while (Hash.get(index) != null) {
+            if (Hash.get(index).key.equals(key) && !Hash.get(index).borrado) {
+                return Hash.get(index).valor;
+            }
+            index = (index + 1) % tableSize;
+        }
+
+        return null;
+    }
+
+    public int size() {
+        return capacity;
+    }
+
+    public MyList<K> getKeys() {
+        MyList<K> keys = new MyLinkedListImpl<>();
+        for (int i = 0; i < tableSize; i++) {
+            HashNode<K, V> node = Hash.get(i);
+            if (node != null && !node.borrado) {
+                keys.add(node.key);
+            }
+        }
+        return keys;
     }
 
 

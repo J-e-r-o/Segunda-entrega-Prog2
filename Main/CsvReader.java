@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CsvReader {
     public static void main(String[] args) {
         String csvFile = "universal_top_spotify_songs.csv"; // universal_top_spotify_songs.csv TIENE que ser el nombre del archivo
-        hash<String,String> h= new hash<String,String>();
+        hash<String,String> h= new hash<String,String>(10000);
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
