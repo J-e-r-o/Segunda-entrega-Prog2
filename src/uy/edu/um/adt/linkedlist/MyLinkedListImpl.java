@@ -9,6 +9,8 @@ import src.uy.edu.um.adt.queue.MyQueue;
 import src.uy.edu.um.adt.stack.EmptyStackException;
 import src.uy.edu.um.adt.stack.MyStack;
 
+import java.util.Iterator;
+
 public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T>, MyCircularLinkedList<T> {
 
     private Node<T> first;
@@ -246,7 +248,26 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T>, M
         return get(position % size());
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
 
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T value = current.getValue();
+            current = current.getNext();
+            return value;
+        }
+    }
 
 
 }

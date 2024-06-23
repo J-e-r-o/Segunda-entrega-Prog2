@@ -1,4 +1,7 @@
 package src.uy.edu.um.adt.hashCerrado;
+import src.uy.edu.um.adt.linkedlist.MyLinkedListImpl;
+import src.uy.edu.um.adt.linkedlist.MyList;
+
 import java.util.Vector;
 import java.util.ArrayList;
 
@@ -123,9 +126,17 @@ public class hash<K,V> implements hashInterfaze<K,V>{
     }
     //Listo
     private int HashFunction(K key){
-        return (key.hashCode()) % tableSize;
+        int hashValue = key.hashCode();
+        if (hashValue < 0) {
+            hashValue = -hashValue;
+            if (hashValue < 0) {
+                hashValue = 0;
+            }
+        }
+        return hashValue % tableSize;
     }
     //Listo
+
     public String ShowHash(){
         String resultado="{";
         for(int i=0;i<tableSize;i++){
@@ -151,6 +162,21 @@ public class hash<K,V> implements hashInterfaze<K,V>{
         }
 
         return null;
+    }
+
+    public int size() {
+        return capacity;
+    }
+
+    public MyList<K> getKeys() {
+        MyList<K> keys = new MyLinkedListImpl<>();
+        for (int i = 0; i < tableSize; i++) {
+            HashNode<K, V> node = Hash.get(i);
+            if (node != null && !node.borrado) {
+                keys.add(node.key);
+            }
+        }
+        return keys;
     }
 
 

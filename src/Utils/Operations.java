@@ -7,7 +7,10 @@ import src.uy.edu.um.adt.linkedlist.MyList;
 import src.uy.edu.um.adt.hashCerrado.*;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Operations {
 
@@ -112,22 +115,33 @@ public class Operations {
         return quantity;
     }
 
-    public static int QuantityOfSongsWithSpecificTempoAndDate(MyList<Song> songs, float startTempo, float finishTempo, Date startDate, Date finishDate) {
-
+    public static int QuantityOfSongsWithSpecificTempoAndDate(hashInterfaze<String, Song> songs, float startTempo, float finishTempo, Date startDate, Date finishDate) throws ParseException {
         int count = 0;
-        for (int i = 0; i < songs.size(); i++) {
-            float tempoItem = songs.get(i).getTempo();
-            String dateItem = songs.get(i).getCreationDate();
+        MyList<String> keys = songs.getKeys();
+        Iterator<String> iterator = keys.iterator();
 
-            if ((tempoItem >= startTempo) && (tempoItem <= finishTempo) /*&& (dateItem.after(startDate)) && (dateItem.before(finishDate))*/) {
-                count++;
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            float tempoItem = songs.get(key).getTempo();
+            String dateItem = songs.get(key).getCreationDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateItemFormatted = dateFormat.parse(dateItem);
 
+            if ((tempoItem >= startTempo) && (tempoItem <= finishTempo) && (dateItemFormatted.after(startDate)) && (dateItemFormatted.before(finishDate))) {
+               count++;
             }
         }
 
+        System.out.println(count);
         return count;
 
     }
+
+
+
+
+
+
 
 
 }

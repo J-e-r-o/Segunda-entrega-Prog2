@@ -2,6 +2,7 @@ package src;
 
 import src.Entities.*;
 import src.uy.edu.um.adt.linkedlist.*;
+import src.uy.edu.um.adt.hashCerrado.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,12 +23,15 @@ TO DO LIST:
 Cargar datos en entries
 Hacer logica con heap para sacar los tops de canciones y artistas
 Testear que funcione
+Pasar a Hash para carga eficiente
 * */
 
 
 public class Main{
     public static void  main(String [] args){
-        MyList<Song> songs = new MyLinkedListImpl<Song>();
+        //MyList<Song> songs = new MyLinkedListImpl<Song>();
+        hashInterfaze<String, Song> songs = new hash<>(800000);
+
         MyList<Entry> entries = new MyLinkedListImpl<Entry>();
 
         String csvFile ="universal_top_spotify_songs.csv" ;
@@ -107,12 +111,10 @@ public class Main{
                         System.out.println("Ingrese un tempo de fin: ");
                         float secondTempo = Float.parseFloat(scanner.next());
                         System.out.println("Ingrese una fecha de inicio: ");
-                        SimpleDateFormat dateFormat2 = new SimpleDateFormat(scanner.next());
+                        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
                         Date firstDate = dateFormat2.parse(scanner.next());
-                        System.out.println("Entre: ");
                         System.out.println("Ingrese una fecha de fin: ");
-                        SimpleDateFormat dateFormat3 = new SimpleDateFormat(scanner.next());
-                        Date secondDate = dateFormat3.parse(scanner.next());
+                        Date secondDate = dateFormat2.parse(scanner.next());
                         QuantityOfSongsWithSpecificTempoAndDate(songs, firstTempo, secondTempo, firstDate, secondDate);
                         break;
                     case 6:
@@ -124,7 +126,7 @@ public class Main{
             } catch (InputMismatchException e) {
                 System.out.println("Input invalido");
                 scanner.next();
-            } catch (ParseException e) {
+            }  catch (ParseException e) {
                 throw new RuntimeException(e);
             }
         }
