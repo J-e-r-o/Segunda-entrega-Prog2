@@ -19,6 +19,7 @@ public class Operations {
         Iterator<Song> iterator = keys.iterator();
         MyHeap<Entry> entriesToPrint = new MyHeapMin<>(10);
         boolean isFull = false;
+        int count = 0;
 
         while (iterator.hasNext()) {
             Song key = iterator.next();
@@ -32,6 +33,11 @@ public class Operations {
                 if (!isFull) {
                     try {
                         entriesToPrint.insert(entryToAdd);
+                        count++;
+                        if (count == 10) {
+                            count++;
+                        }
+
                     } catch (HeapOverflow e) {
                         throw new RuntimeException(e);
                     }
@@ -74,6 +80,7 @@ public class Operations {
         hashInterfaze<Song, Integer> songEntries = new hash<>(10000);
         MyList<Song> keys = entries.getKeys();
         Iterator<Song> iterator = keys.iterator();
+        MyHeap<Integer> entriesToPrint = new MyHeapMin<>(5);
 
 
         while (iterator.hasNext()) {
@@ -97,10 +104,59 @@ public class Operations {
             }
         }
 
-        //MyHeap<Song> songsHeap = new MyHeapImpl<Song>(10);
-        /*recorro el hash
-            heapSort para que me devuelva el top 5
-        */
+        boolean isFull = false;
+        int count = 0;
+        MyList<Song> keys2 = songEntries.getKeys();
+        Iterator<Song> iterator2 = keys2.iterator();
+
+        while (iterator2.hasNext()) {
+            Song key2 = iterator2.next();
+            int topValue = songEntries.get(key2);
+
+            if (!isFull) {
+                try {
+                    entriesToPrint.insert(topValue);
+                    count++;
+                    if (count == 10) {
+                        count++;
+                    }
+
+                } catch (HeapOverflow e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                if (topValue > entriesToPrint.top()) {
+                    try {
+                        entriesToPrint.delete();
+                    } catch (EmptyHeapException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        entriesToPrint.insert(topValue);
+                    } catch (HeapOverflow e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+
+        //esta imprimiendo por la aparicion y no por el nombre de la cancion
+        for (int i = 0; i < entriesToPrint.size(); i++) {
+            int value = entriesToPrint.top();
+            System.out.print(i+1);
+            System.out.print(", ");
+            System.out.println(value);
+            System.out.println("\n");
+            try {
+                entriesToPrint.delete();
+            } catch (EmptyHeapException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
+
     }
 
     public static void top7artistsFromRankingAndDate(hashInterfaze<Song,Entry> entries, Date startDate, Date finishDate) {
