@@ -161,6 +161,9 @@ public class Operations {
 
     public static void top7artistsFromRankingAndDate(hashInterfaze<Song,Entry> entries, Date startDate, Date finishDate) {
 
+        //IMPLEMENTACION VIEJA CON LA LISTA
+        //TIEMPO DE CARGA MUY LENTO
+
 //        hashInterfaze<Artist, Integer> artistsEntries = new hash<>(10000);
 //
 //        for (int i = 0; i < entries.size(); i++) {

@@ -104,6 +104,10 @@ public class Main{
                         top10SongsFromCountryAndDate(entries, newInputCountry, dateCase1);
                         break;
                     case 2:
+                        System.out.println("Ingrese una fecha: ");
+                        SimpleDateFormat dateFormat7 = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dateCase2 = dateFormat7.parse(scanner.next());
+                        top5SongsFromRankingAndDate(entries, dateCase2);
                         break;
                     case 3:
                         break;

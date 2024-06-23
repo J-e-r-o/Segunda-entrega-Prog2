@@ -35,9 +35,10 @@ public class UploadEntities {
     public static void addEntry(hashInterfaze<Song, Entry> entries, hashInterfaze<String, Song> songs, String[] line) throws Exception {
 
         String stringPosition = line[3];
-        if (!canBeConvertedToInt(stringPosition)) {
-            return;
+        if (!isValidInt(stringPosition)) {
+            stringPosition = "-1";
         }
+
         int formattedPosition = Integer.parseInt(stringPosition.replaceAll("\"", "").trim());
         String formattedCountry = line[6].replaceAll("\"", "").trim();
         String formattedDate = line[7].replaceAll("\"", "").trim();
@@ -52,8 +53,7 @@ public class UploadEntities {
         Song song = songs.get(key);
 
         Entry newEntry = new Entry(song, formattedCountry, formattedDate, formattedPosition);
-
-        if (!entries.contains(song)) {
+        if (song != null && !entries.contains(song)) {
             entries.put(song, newEntry);
         }
     }
@@ -96,6 +96,19 @@ public class UploadEntities {
         }
         try {
             Integer.parseInt(str.trim());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidInt(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
             return false;
